@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Free Scholar",
+  "version": "1.0",
+  "description": "Find free versions of Google Scholar articles.",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": ["activeTab"]
+}
