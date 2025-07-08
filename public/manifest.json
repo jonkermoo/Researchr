@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Free Scholar",
+  "name": "Researchr",
   "version": "1.0",
   "description": "Find free versions of Google Scholar articles.",
   "action": {
