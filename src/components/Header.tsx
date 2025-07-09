@@ -1,4 +1,4 @@
-import researchr from "../../assets/images/researchr.png";
+import researchr from "../assets/images/researchr.png";
 
 export default function Header() {
   const onClick = () => {

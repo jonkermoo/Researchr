@@ -1,35 +1,61 @@
 /*import { useEffect, useState } from "react";
 import detectDOI from "./utils/detectDOI";*/
 
-import Header from "./components/screens/Header";
+import Header from "./components/Header";
+import Welcome from "./components/screens/Welcome";
+import detectDOI from "./utils/detectDOI";
+import { useEffect, useState } from "react";
 
-function App() {
-  /*  const [screen, setScreen] = useState("loading");
+type Screen = "loading" | "welcome" | "doi" | "nodoi";
 
+export default function App() {
+  const [screen, setScreen] = useState<Screen>("loading");
+  const [_foundDoi, setFoundDoi] = useState<string | null>(null);
 
   useEffect(() => {
-    const hostname = window.location.hostname;
-    const pathname = window.location.pathname;
+    // 1️⃣ ask Chrome for the active tab
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (!tabs.length) return setScreen("nodoi");
 
-    const searchEngines = [
-      "google.com",
-      "bing.com",
-      "yahoo.com",
-      "duckduckgo.com",
-    ];
-    const isHomepage = pathname === "/" || pathname === "";
-    const isSearchEngine = searchEngines.some((engine) =>
-      hostname.includes(engine)
-    );
+      const tab = tabs[0];
+      const url = new URL(tab.url ?? "about:blank");
+      const { hostname, pathname } = url;
 
-    if (isSearchEngine && isHomepage) {
-      setScreen("welcome");
-    } else if (detectDOI()) {
-      setScreen("doi");
-    } else {
-      setScreen("nodoi");
-    }
-  }, []);*/
+      // 2️⃣ welcome screen if user is **on** a search-engine homepage
+      const searchEngines = [
+        "google.com",
+        "bing.com",
+        "duckduckgo.com",
+        "yahoo.com",
+      ];
+      const isSearchHome =
+        (pathname === "/" || pathname === "") &&
+        searchEngines.some((e) => hostname.includes(e));
+
+      if (isSearchHome) {
+        setScreen("welcome");
+        return;
+      }
+
+      chrome.scripting.executeScript(
+        {
+          target: { tabId: tab.id!, allFrames: false },
+          func: () => document.body.innerText,
+        },
+        (results) => {
+          const pageText = results?.[0]?.result as string;
+          const found = detectDOI(pageText);
+
+          if (found) {
+            setFoundDoi(found);
+            setScreen("doi");
+          } else {
+            setScreen("nodoi");
+          }
+        }
+      );
+    });
+  }, []);
 
   return (
     <div className="grid grid-rows-[2fr_11fr_1.2fr] h-full">
@@ -40,7 +66,8 @@ function App() {
 
       {/*body*/}
       <div className="border-b-1 border-[#CDCDCD]">
-        <div className="text-black">Test</div>
+        {screen === "welcome" && <Welcome />}
+        {screen === "doi" && <p>doi</p>}
       </div>
 
       {/*footnote*/}
@@ -50,5 +77,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
