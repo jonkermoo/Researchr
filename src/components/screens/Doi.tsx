@@ -48,7 +48,16 @@ export default function Doi({ doi }: Props) {
   }, [doi]);
 
   if (status === "loading") {
-    return <p className=" ">Loading...</p>;
+    return (
+      <div className="flex flex-col justify-center items-center gap-[25px] h-full">
+        <div className="text-[16px]" style={{ fontFamily: "Hind, sans-serif" }}>
+          Loading...
+        </div>
+        <div>
+          <img src={Logo} alt="Researchr Logo" className="w-[75px] h-auto" />
+        </div>
+      </div>
+    );
   }
 
   if (status === "found" && pdfURL) {
@@ -91,7 +100,7 @@ export default function Doi({ doi }: Props) {
 
   return (
     <div className="flex flex-col justify-center items-center gap-[25px] h-full">
-      <div className="text-[16px]" style={{ fontFamily: "Hind, sans-serif" }}>
+      <div className="text-[16px] " style={{ fontFamily: "Hind, sans-serif" }}>
         ERROR
       </div>
       <div>

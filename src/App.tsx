@@ -3,6 +3,7 @@ import Doi from "./components/screens/Doi";
 import Welcome from "./components/screens/Welcome";
 import detectDOI from "./utils/detectDOI";
 import { useEffect, useState } from "react";
+import Logo from "./assets/images/logo.png";
 
 type Screen = "loading" | "welcome" | "doi" | "nodoi";
 
@@ -64,6 +65,25 @@ export default function App() {
       {/*body*/}
       <div className="border-b-1 border-[#CDCDCD]">
         {screen === "welcome" && <Welcome />}
+        {screen === "loading" && (
+          <p>
+            <div className="flex flex-col justify-center items-center gap-[25px] h-full">
+              <div
+                className="text-[16px]"
+                style={{ fontFamily: "Hind, sans-serif" }}
+              >
+                Loading...
+              </div>
+              <div>
+                <img
+                  src={Logo}
+                  alt="Researchr Logo"
+                  className="w-[75px] h-auto"
+                />
+              </div>
+            </div>
+          </p>
+        )}
         {screen === "doi" && <Doi doi={_foundDoi} />}
       </div>
 
