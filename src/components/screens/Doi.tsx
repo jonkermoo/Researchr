@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Logo from "../../assets/images/logo.png";
 
 interface Props {
   doi: string | null;
@@ -47,18 +48,24 @@ export default function Doi({ doi }: Props) {
   }, [doi]);
 
   if (status === "loading") {
-    return <p className="">Loading...</p>;
+    return <p className=" ">Loading...</p>;
   }
 
   if (status === "found" && pdfURL) {
     return (
-      <div className="flex flex-col items-center gap-3 p-4">
-        <p className="text-center break-all">{doi}</p>
+      <div className="h-full flex flex-col justify-center items-center gap-[15px]">
+        <p
+          className="text-center text-[16px] font-bold"
+          style={{ fontFamily: "Hind, sans-serif" }}
+        >
+          We found something!
+        </p>
         <a
           href={pdfURL}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white text-sm font-medium"
+          className="px-4 py-2 rounded-lg bg-[#7F95C3] hover:bg-[#647EB6] text-white text-sm font-medium"
+          style={{ fontFamily: "Hind, sans-serif" }}
         >
           {pdfURL.endsWith(".pdf") ? "Download Free PDF" : "View Free Version"}
         </a>
@@ -67,8 +74,32 @@ export default function Doi({ doi }: Props) {
   }
 
   if (status === "nofree") {
-    return <p className="">Sorry, no results</p>;
+    return (
+      <div className="flex flex-col justify-center items-center gap-[25px] h-full">
+        <div className="text-[16px]" style={{ fontFamily: "Hind, sans-serif" }}>
+          We found no matches
+        </div>
+        <div>
+          <img src={Logo} alt="Researchr Logo" className="w-[75px] h-auto" />
+        </div>
+        <div className="text-[16px]" style={{ fontFamily: "Hind, sans-serif" }}>
+          {"Sorry :("}
+        </div>
+      </div>
+    );
   }
 
-  return <p className="">ERROR</p>;
+  return (
+    <div className="flex flex-col justify-center items-center gap-[25px] h-full">
+      <div className="text-[16px]" style={{ fontFamily: "Hind, sans-serif" }}>
+        ERROR
+      </div>
+      <div>
+        <img src={Logo} alt="Researchr Logo" className="w-[75px] h-auto" />
+      </div>
+      <div className="text-[14px]" style={{ fontFamily: "Hind, sans-serif" }}>
+        Please contact us with issues!
+      </div>
+    </div>
+  );
 }
