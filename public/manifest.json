@@ -13,7 +13,6 @@
   },
   "permissions": ["activeTab, tabs", "scripting"],
   "host_permissions": [
-    "https://api.unpaywall.org/*",
-    "<all_urls>"
+    "https://api.unpaywall.org/*"
   ]
 }
