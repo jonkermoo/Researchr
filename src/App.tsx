@@ -1,6 +1,3 @@
-/*import { useEffect, useState } from "react";
-import detectDOI from "./utils/detectDOI";*/
-
 import Header from "./components/Header";
 import Welcome from "./components/screens/Welcome";
 import detectDOI from "./utils/detectDOI";
