@@ -18,7 +18,7 @@ export default function App() {
 
       const tab = tabs[0];
       const url = new URL(tab.url ?? "about:blank");
-      const { hostname, pathname } = url;
+      const { hostname } = url;
 
       const searchEngines = [
         "google.com",
@@ -26,9 +26,7 @@ export default function App() {
         "duckduckgo.com",
         "yahoo.com",
       ];
-      const isSearchHome =
-        (pathname === "/" || pathname === "") &&
-        searchEngines.some((e) => hostname.includes(e));
+      const isSearchHome = searchEngines.some((e) => hostname.includes(e));
 
       if (isSearchHome) {
         setScreen("welcome");
@@ -64,42 +62,25 @@ export default function App() {
       </div>
 
       {/*body*/}
-      <div className="border-b-1 border-[#CDCDCD]">
+      <div className="border-b-1 border-[#CDCDCD] h-full">
         {screen === "welcome" && <Welcome />}
         {screen === "loading" && (
-          <p>
-            <div className="flex flex-col justify-center items-center gap-[25px] h-full">
-              <div
-                className="text-[16px]"
-                style={{ fontFamily: "Hind, sans-serif" }}
-              >
-                Loading...
-              </div>
-              <div>
-                <img
-                  src={Logo}
-                  alt="Researchr Logo"
-                  className="w-[75px] h-auto"
-                />
-              </div>
-              <div className="flex flex-col justify-center items-center gap-[25px] h-full">
-                <div
-                  className="text-[16px]"
-                  style={{ fontFamily: "Hind, sans-serif" }}
-                >
-                  Loading...
-                </div>
-                <div>
-                  <img
-                    src={Logo}
-                    alt="Researchr Logo"
-                    className="w-[75px] h-auto"
-                  />
-                </div>
-                <div className="animate-spin rounded-full border-4 border-t-[#7F95C3] border-gray-300 w-8 h-8"></div>
-              </div>
+          <div className="flex flex-col justify-center items-center gap-[25px] h-full">
+            <div
+              className="text-[16px]"
+              style={{ fontFamily: "Hind, sans-serif" }}
+            >
+              Loading...
             </div>
-          </p>
+            <div>
+              <img
+                src={Logo}
+                alt="Researchr Logo"
+                className="w-[75px] h-auto"
+              />
+            </div>
+            <div className="animate-spin rounded-full border-4 border-t-[#7F95C3] border-gray-300 w-8 h-8"></div>
+          </div>
         )}
         {screen === "doi" && <Doi doi={_foundDoi} />}
         {screen === "nodoi" && <NoDoi />}
