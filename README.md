@@ -40,5 +40,3 @@ Researchr is a lightweight Chrome extension that helps you find free, open-acces
 - Free PDF: https://essd.copernicus.org/articles/5/165/2013/
 
 - No Free Alternatives: https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/j.0022-0477.2004.00874.x
-
-- No DOI Found: https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/j.0022-0477.2004.00874.x
