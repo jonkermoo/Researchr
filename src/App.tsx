@@ -1,4 +1,5 @@
 import Header from "./components/Header";
+import Doi from "./components/screens/Doi";
 import Welcome from "./components/screens/Welcome";
 import detectDOI from "./utils/detectDOI";
 import { useEffect, useState } from "react";
@@ -10,7 +11,6 @@ export default function App() {
   const [_foundDoi, setFoundDoi] = useState<string | null>(null);
 
   useEffect(() => {
-    // 1️⃣ ask Chrome for the active tab
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (!tabs.length) return setScreen("nodoi");
 
@@ -18,7 +18,6 @@ export default function App() {
       const url = new URL(tab.url ?? "about:blank");
       const { hostname, pathname } = url;
 
-      // 2️⃣ welcome screen if user is **on** a search-engine homepage
       const searchEngines = [
         "google.com",
         "bing.com",
@@ -44,7 +43,8 @@ export default function App() {
           const found = detectDOI(pageText);
 
           if (found) {
-            setFoundDoi(found);
+            const cleanDoi = found.replace(/[.,;]+$/, "");
+            setFoundDoi(cleanDoi);
             setScreen("doi");
           } else {
             setScreen("nodoi");
@@ -64,7 +64,7 @@ export default function App() {
       {/*body*/}
       <div className="border-b-1 border-[#CDCDCD]">
         {screen === "welcome" && <Welcome />}
-        {screen === "doi" && <p>doi</p>}
+        {screen === "doi" && <Doi doi={_foundDoi} />}
       </div>
 
       {/*footnote*/}
