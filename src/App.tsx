@@ -4,6 +4,7 @@ import Welcome from "./components/screens/Welcome";
 import detectDOI from "./utils/detectDOI";
 import { useEffect, useState } from "react";
 import Logo from "./assets/images/logo.png";
+import NoDoi from "./components/screens/NoDoi";
 
 type Screen = "loading" | "welcome" | "doi" | "nodoi";
 
@@ -81,10 +82,27 @@ export default function App() {
                   className="w-[75px] h-auto"
                 />
               </div>
+              <div className="flex flex-col justify-center items-center gap-[25px] h-full">
+                <div
+                  className="text-[16px]"
+                  style={{ fontFamily: "Hind, sans-serif" }}
+                >
+                  Loading...
+                </div>
+                <div>
+                  <img
+                    src={Logo}
+                    alt="Researchr Logo"
+                    className="w-[75px] h-auto"
+                  />
+                </div>
+                <div className="animate-spin rounded-full border-4 border-t-[#7F95C3] border-gray-300 w-8 h-8"></div>
+              </div>
             </div>
           </p>
         )}
         {screen === "doi" && <Doi doi={_foundDoi} />}
+        {screen === "nodoi" && <NoDoi />}
       </div>
 
       {/*footnote*/}

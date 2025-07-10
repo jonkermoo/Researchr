@@ -49,13 +49,14 @@ export default function Doi({ doi }: Props) {
 
   if (status === "loading") {
     return (
-      <div className="flex flex-col justify-center items-center gap-[25px] h-full">
+      <div className="flex flex-col justify-center items-center gap-[15px] h-full">
         <div className="text-[16px]" style={{ fontFamily: "Hind, sans-serif" }}>
           Loading...
         </div>
         <div>
           <img src={Logo} alt="Researchr Logo" className="w-[75px] h-auto" />
         </div>
+        <div className="animate-spin rounded-full border-4 border-t-[#7F95C3] border-gray-300 w-8 h-8"></div>
       </div>
     );
   }
@@ -84,22 +85,31 @@ export default function Doi({ doi }: Props) {
 
   if (status === "nofree") {
     return (
-      <div className="flex flex-col justify-center items-center gap-[25px] h-full">
-        <div className="text-[16px]" style={{ fontFamily: "Hind, sans-serif" }}>
-          We found no matches
+      <div className="flex flex-col justify-center items-center gap-[15px] h-full">
+        <div
+          className="text-[16px] font-bold"
+          style={{ fontFamily: "Hind, sans-serif" }}
+        >
+          No match found
         </div>
         <div>
           <img src={Logo} alt="Researchr Logo" className="w-[75px] h-auto" />
         </div>
-        <div className="text-[16px]" style={{ fontFamily: "Hind, sans-serif" }}>
-          {"Sorry :("}
+        <div
+          className="text-[14px] text-center"
+          style={{ fontFamily: "Hind, sans-serif" }}
+        >
+          <p>We found no free versions of this source 💔</p>
+          <p className="text-[12px]">
+            If you believe this is an error, please contact us!
+          </p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col justify-center items-center gap-[25px] h-full">
+    <div className="flex flex-col justify-center items-center gap-[15px] h-full">
       <div className="text-[16px] " style={{ fontFamily: "Hind, sans-serif" }}>
         ERROR
       </div>
