@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Researchr",
   "version": "1.0",
-  "description": "Find free versions of Google Scholar articles.",
+  "description": "Stop hitting paywalls! Researchr finds free, legal PDF copies of academic articles.",
   "action": {
     "default_popup": "index.html",
     "default_icon": {
