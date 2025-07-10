@@ -32,13 +32,11 @@ export default function Doi({ doi }: Props) {
         const data = await r.json();
         const best = data.best_oa_location;
 
-        if (data.is_oa && best?.url_for_pdf) {
-          if (isMounted) {
-            setPdfURL(best.url_for_pdf);
-            setStatus("found");
-          }
+        if (data.is_oa && best && (best.url_for_pdf || best.url)) {
+          setPdfURL(best.url_for_pdf ?? best.url);
+          setStatus("found");
         } else {
-          if (isMounted) setStatus("nofree");
+          setStatus("nofree");
         }
       })
       .catch(() => isMounted && setStatus("error"));
@@ -56,8 +54,13 @@ export default function Doi({ doi }: Props) {
     return (
       <div className="flex flex-col items-center gap-3 p-4">
         <p className="text-center break-all">{doi}</p>
-        <a href={pdfURL} target="_blank" rel="noopener noreferrer" className="">
-          Download
+        <a
+          href={pdfURL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white text-sm font-medium"
+        >
+          {pdfURL.endsWith(".pdf") ? "Download Free PDF" : "View Free Version"}
         </a>
       </div>
     );
