@@ -5,6 +5,7 @@ import detectDOI from "./utils/detectDOI";
 import { useEffect, useState } from "react";
 import Logo from "./assets/images/logo.png";
 import NoDoi from "./components/screens/NoDoi";
+import "./style/fonts.css";
 
 type Screen = "loading" | "welcome" | "doi" | "nodoi";
 
@@ -66,12 +67,7 @@ export default function App() {
         {screen === "welcome" && <Welcome />}
         {screen === "loading" && (
           <div className="flex flex-col justify-center items-center gap-[25px] h-full">
-            <div
-              className="text-[16px]"
-              style={{ fontFamily: "Hind, sans-serif" }}
-            >
-              Loading...
-            </div>
+            <div className="text-[16px] font-hind">Loading...</div>
             <div>
               <img
                 src={Logo}

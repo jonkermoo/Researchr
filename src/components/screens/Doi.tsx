@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Logo from "../../assets/images/logo.png";
+import "../../style/fonts.css";
 
 interface Props {
   doi: string | null;
@@ -50,9 +51,7 @@ export default function Doi({ doi }: Props) {
   if (status === "loading") {
     return (
       <div className="flex flex-col justify-center items-center gap-[15px] h-full">
-        <div className="text-[16px]" style={{ fontFamily: "Hind, sans-serif" }}>
-          Loading...
-        </div>
+        <div className="text-[16px] font-hind">Loading...</div>
         <div>
           <img src={Logo} alt="Researchr Logo" className="w-[75px] h-auto" />
         </div>
@@ -64,18 +63,14 @@ export default function Doi({ doi }: Props) {
   if (status === "found" && pdfURL) {
     return (
       <div className="h-full flex flex-col justify-center items-center gap-[15px]">
-        <p
-          className="text-center text-[16px] font-bold"
-          style={{ fontFamily: "Hind, sans-serif" }}
-        >
+        <p className="text-center text-[16px] font-bold font-hind">
           We found something!
         </p>
         <a
           href={pdfURL}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-4 py-2 rounded-lg bg-[#7F95C3] hover:bg-[#647EB6] text-white text-sm font-medium"
-          style={{ fontFamily: "Hind, sans-serif" }}
+          className="px-4 py-2 rounded-lg bg-[#7F95C3] hover:bg-[#647EB6] text-white text-sm font-medium font-hind"
         >
           {pdfURL.endsWith(".pdf") ? "Download Free PDF" : "View Free Version"}
         </a>
@@ -86,19 +81,11 @@ export default function Doi({ doi }: Props) {
   if (status === "nofree") {
     return (
       <div className="flex flex-col justify-center items-center gap-[15px] h-full">
-        <div
-          className="text-[16px] font-bold"
-          style={{ fontFamily: "Hind, sans-serif" }}
-        >
-          No match found
-        </div>
+        <div className="text-[16px] font-bold font-hind">No match found</div>
         <div>
           <img src={Logo} alt="Researchr Logo" className="w-[75px] h-auto" />
         </div>
-        <div
-          className="text-[14px] text-center"
-          style={{ fontFamily: "Hind, sans-serif" }}
-        >
+        <div className="text-[14px] text-center font-hind">
           <p>We found no free versions of this source 💔</p>
           <p className="text-[12px]">
             If you believe this is an error, please contact us!
@@ -110,13 +97,11 @@ export default function Doi({ doi }: Props) {
 
   return (
     <div className="flex flex-col justify-center items-center gap-[15px] h-full">
-      <div className="text-[16px] " style={{ fontFamily: "Hind, sans-serif" }}>
-        ERROR
-      </div>
+      <div className="text-[16px] font-hind">ERROR</div>
       <div>
         <img src={Logo} alt="Researchr Logo" className="w-[75px] h-auto" />
       </div>
-      <div className="text-[14px]" style={{ fontFamily: "Hind, sans-serif" }}>
+      <div className="text-[14px] font-hind">
         Please contact us with issues!
       </div>
     </div>
